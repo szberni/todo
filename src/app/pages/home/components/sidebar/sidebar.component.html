@@ -1,0 +1,50 @@
+<div class="sidebar" [ngClass]="{ 'sidebar-open': isOpen }">
+  <ng-container *ngIf="isOpen; else isNotOpen">
+    <div class="sidebar-header">
+      <button type="button" class="button hover-background" (click)="toggleOpenStatus()">
+        <div class="icon-container">
+          <span class="close-icon"></span>
+        </div>
+      </button>
+    </div>
+
+    <div class="vertical-scroll">
+      <h2 class="title">Your boards</h2>
+
+      <ol class="list">
+        <li
+          *ngFor="let boardTitleIsFavorite of boardsTitleIsFavorite$ | async; trackBy: trackById"
+          class="list-item hover-background"
+        >
+          <div class="list-item-text">
+            <a
+              class="link"
+              routerLink="/{{HOME_ROUTE}}/{{ boardTitleIsFavorite.id }}"
+              routerLinkActive="link-active"
+            >
+              {{ boardTitleIsFavorite.title }}
+            </a>
+          </div>
+
+          <button
+            *ngIf="boardTitleIsFavorite.id"
+            type="button"
+            class="button"
+            aria-label="Star or unstar board"
+            (click)="toggleFavorite(boardTitleIsFavorite)"
+          >
+            <div class="icon-container">
+              <div class="icon-resize" [ngClass]="boardTitleIsFavorite.isFavorite ? 'star-icon': 'star-outline-icon'"></div>
+            </div>
+          </button>
+        </li>
+      </ol>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #isNotOpen>
+  <button type="button" class="circle hover-background" (click)="toggleOpenStatus()">
+    <span class="open-icon"></span>
+  </button>
+</ng-template>

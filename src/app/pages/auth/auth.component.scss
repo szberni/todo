@@ -1,0 +1,96 @@
+@import 'src/styles/variables';
+
+input {
+  width: 380px;
+  border: 1px solid $auth-border-color;
+  border-radius: 6px;
+  padding: 8px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  outline: none;
+}
+
+button {
+  border: 1px solid $auth-border-color;
+  border-radius: 6px;
+  padding: 8px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: $auth-disabled-color;
+  cursor: auto;
+}
+
+button:not(:disabled) {
+  background-color: $auth-success-color;;
+  border-color: $auth-success-color;;
+  color: $white;
+}
+
+button:not(:disabled):hover {
+  opacity: 0.8;
+}
+
+a {
+  color: $auth-link-color;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.ng-invalid.ng-touched,
+.border-highlight {
+  border-color: $auth-error-color;
+}
+
+.text-highlight {
+  color: $auth-error-color;
+}
+
+.text-highlight-success {
+  color: $auth-success-color;;
+}
+
+.auth {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $white;
+  box-shadow: $shadow-color 0 0 10px;
+  width: 600px;
+  box-sizing: border-box;
+  padding: 24px;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.message {
+  width: 380px;
+  margin-left: auto;
+  font-size: 14px;
+  padding-right: 8px;
+  text-align: left;
+  list-style-type: square;
+  color: $auth-error-color;
+}

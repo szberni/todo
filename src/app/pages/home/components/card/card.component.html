@@ -1,0 +1,94 @@
+<ng-template #modal>
+  <div class="card-modal">
+    <div class="flex-container">
+      <div class="icon-container">
+        <div class="card-icon icon-md"></div>
+      </div>
+
+      <div class="flex-grow">
+        <textarea
+          #titleTextarea
+          *ngIf="isTitleEditing; else titleNotEditing"
+          class="textarea title-textarea full-width title"
+          appAutoFocus
+          appResizableTextarea
+          maxlength="512"
+          spellcheck="false"
+          (blur)="updateTitle(titleTextarea)"
+        >{{ card.title }}</textarea>
+
+        <p class="text">in list {{ listTitle }}</p>
+      </div>
+
+      <button type="button" class="button-close" aria-label="Close" (click)="close()">&times;</button>
+    </div>
+
+    <div class="padding-top flex-container">
+      <section class="flex-grow flex-container">
+        <div class="icon-container">
+          <div class="description-icon icon-md"></div>
+        </div>
+
+        <div class="flex-grow">
+          <h3 class="title-large">Description</h3>
+
+          <ng-container *ngIf="isDescriptionEditing; else descriptionNotEditing">
+            <textarea
+              #descriptionTextarea
+              class="textarea text full-width"
+              appAutoFocus
+              appResizableTextarea
+              maxlength="512"
+              spellcheck="false"
+              (blur)="updateDescription(descriptionTextarea, $event)"
+            >{{ card.description }}</textarea>
+
+            <button class="btn-save btn-text">Save</button>
+
+            <button class="btn-cancel btn-text">Cancel</button>
+          </ng-container>
+        </div>
+
+        <div *ngIf="!isDescriptionEditing && card.description !== ''">
+          <button class="btn-actions btn-text" (click)="toggleDescriptionEditing()">Edit</button>
+        </div>
+      </section>
+
+      <div class="actions">
+        <h3 class="title-small">Actions</h3>
+
+        <button class="btn-actions btn-text btn-alignment full-width" (click)="archive()">
+          <div class="archive-icon"></div>
+          Archive
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #titleNotEditing>
+  <h2
+    class="title text-cursor"
+    tabindex="0"
+    (click)="toggleTitleEditing()"
+    (keypress)="toggleTitleEditing()"
+  >
+    {{ card.title }}
+  </h2>
+</ng-template>
+
+<ng-template #descriptionNotEditing>
+  <p
+    [ngClass]="{ 'btn-actions': !card.description || card.description === '' }"
+    class="text text-cursor btn-actions"
+    tabindex="0"
+    (click)="toggleDescriptionEditing()"
+    (keypress)="toggleDescriptionEditing()"
+  >
+    {{
+      !card.description || card.description === ''
+        ? 'Add a description...'
+        : card.description
+    }}
+  </p>
+</ng-template>

@@ -1,0 +1,132 @@
+@import 'src/styles/icons.scss';
+@import 'src/styles/variables.scss';
+
+.sidebar {
+  position: relative;
+  height: 100%;
+  width: 16px;
+  transition: 0.5s;
+  background-color: $dark-background-color;
+  border-top: 1px solid $sidebar-border-color;
+}
+
+.sidebar-open {
+  width: 260px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.open-icon {
+  @include svg-icon('/assets/icons/open.svg', $text-main-color);
+  width: 24px;
+  height: 24px;
+}
+
+.circle {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  transform: translateX(50%);
+  height: 26px;
+  width: 26px;
+  border: 1px solid $inactive-highlight-color;
+  border-radius: 50%;
+  background-color: $dark-background-color;
+  backdrop-filter: blur(16px);
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+
+.close-icon {
+  @extend .open-icon;
+  transform: scaleX(-1);
+}
+
+.vertical-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 12px;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid $sidebar-border-color;
+}
+
+.title {
+  padding: 10px 0 4px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  color: $sidebar-text-color;
+  white-space: nowrap;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.list-item {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.list-item-text {
+  flex-grow: 1;
+}
+
+.link {
+  text-decoration: none;
+  color: $sidebar-text-color;
+  padding-left: 12px;
+  min-height: 32px;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  text-wrap: wrap;
+  word-break: break-word;
+}
+
+.link-active {
+  font-weight: 600;
+}
+
+.star-icon {
+  @include svg-icon('/assets/icons/star.svg', $sidebar-text-color);
+}
+
+.star-outline-icon {
+  @include svg-icon('/assets/icons/star-outline.svg', $sidebar-text-color);
+}
+
+.button {
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background-color: transparent;
+
+  .icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &:hover {
+    .icon-resize {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.hover-background:hover {
+  background-color: $sidebar-background-hover-color;
+}

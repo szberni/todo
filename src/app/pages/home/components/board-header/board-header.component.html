@@ -1,0 +1,23 @@
+<div class="board-header">
+  <div class="board-header-items">
+    <h1 class="title">{{ boardTitle$ | async }}</h1>
+
+    <button
+      type="button"
+      class="button"
+      title="Click to star or unstar this board. Starred boards show up at the top of your boards list."
+      aria-label="Star or unstar board"
+      (click)="toggleFavorite()"
+    >
+      <div *ngIf="isBoardFavorite$ | async; else isNotFavorite" class="icon-container">
+        <div class="star-icon icon-resize"></div>
+      </div>
+    </button>
+  </div>
+</div>
+
+<ng-template #isNotFavorite>
+  <div class="icon-container">
+    <div class="star-outline-icon icon-resize"></div>
+  </div>
+</ng-template>

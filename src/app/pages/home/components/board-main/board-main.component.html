@@ -1,0 +1,40 @@
+<ol
+  class="board"
+  cdkDropList
+  cdkDropListOrientation="horizontal"
+  cdkDropListGroup
+  (cdkDropListDropped)="onDrop($event)"
+>
+  <li *ngFor="let list of sortedLists; trackBy: trackById" class="board-item">
+    <app-list [list]="list" cdkDrag></app-list>
+  </li>
+
+  <div class="board-item">
+    <button *ngIf="!isAddListFormShown" class="button" (click)="isAddListFormShown = true">
+      <div class="btn-content">
+        <div class="plus-icon"></div>
+
+        <span>Add another list</span>
+      </div>
+    </button>
+
+    <form *ngIf="isAddListFormShown" class="list" [formGroup]="addListForm" (ngSubmit)="addList()">
+      <textarea
+        appAutoFocus
+        appResizableTextarea
+        class="textarea full-width"
+        maxlength="512"
+        placeholder="Enter list title..."
+        aria-label="Enter list title..."
+        spellcheck="false"
+        formControlName="title"
+      ></textarea>
+
+      <div class="button-group">
+        <button type="submit" class="button-main" [disabled]="addListForm.invalid">Add list</button>
+
+        <button type="button" class="button-close" (click)="resetForm()">&times;</button>
+      </div>
+    </form>
+  </div>
+</ol>

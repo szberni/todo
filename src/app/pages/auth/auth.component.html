@@ -1,0 +1,83 @@
+<div class="auth">
+  <h1>{{ isLogin ? 'Log In' : 'Sign Up' }}</h1>
+
+  <form class="form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">Email</label>
+
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="Enter email"
+        autocomplete="email"
+      />
+    </div>
+
+    <ul *ngIf="isEmailErrorShown" class="message">
+      <li>Please enter a valid email address</li>
+    </ul>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+
+      <input
+        [ngClass]="{ 'border-highlight': !isLogin && isConfirmationErrorShown }"
+        type="password"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+    </div>
+
+    <ul *ngIf="isPasswordErrorShown" class="message">
+      <li *ngIf="isLogin; else signupPasswordErrorMessage">Please enter your password</li>
+    </ul>
+
+    <div *ngIf="!isLogin" class="form-group">
+      <label for="passwordConf">Confirm Password</label>
+
+      <input
+        [ngClass]="{ 'border-highlight': isConfirmationErrorShown }"
+        type="password"
+        id="passwordConf"
+        placeholder="Confirm password"
+        formControlName="passwordConf"
+      />
+    </div>
+
+    <ul *ngIf="isConfirmationErrorShown || isConfirmPasswordRequiredErrorShown" class="message">
+      <li *ngIf="isConfirmationErrorShown">Passwords don't match</li>
+
+      <li *ngIf="isConfirmPasswordRequiredErrorShown">Please confirm your password</li>
+    </ul>
+
+    <button type="submit" [disabled]="!authForm.valid">{{ isLogin ? 'Log In' : 'Sign Up' }}</button>
+  </form>
+
+  <p *ngIf="error$ | async as errorMessage" class="text-highlight">{{ errorMessage }}</p>
+
+  <a [routerLink]="isLogin ? SIGNUP_ROUTE : LOGIN_ROUTE">
+    Go to {{ isLogin ? 'Sign Up' : 'Login' }} page
+  </a>
+</div>
+
+<ng-template #signupPasswordErrorMessage>
+  <li [ngClass]="{ 'text-highlight-success': passwordReachedMinLength }">
+    Password must be at least {{ PASSWORD_MIN_LENGTH }} characters long
+  </li>
+
+  <li [ngClass]="{ 'text-highlight-success': passwordContainsLowercase }">
+    include a lowercase letter
+  </li>
+
+  <li [ngClass]="{ 'text-highlight-success': passwordContainsUppercase }">
+    an uppercase letter
+  </li>
+
+  <li [ngClass]="{ 'text-highlight-success': passwordContainsDigit }">a digit</li>
+
+  <li [ngClass]="{ 'text-highlight-success': passwordContainsSpecialChar }">
+    and a special character.
+  </li>
+</ng-template>

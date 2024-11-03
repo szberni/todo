@@ -1,0 +1,17 @@
+@import 'src/styles/variables';
+
+.home-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-layout {
+  min-height: 0;
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  background: linear-gradient($transparent-background-color, $transparent-background-color),
+    url(https://images.pexels.com/photos/35600/road-sun-rays-path.jpg);
+  background-size: cover;
+}

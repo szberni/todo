@@ -1,0 +1,119 @@
+@import 'src/styles/variables';
+@import 'src/styles/icons';
+
+:host {
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.board {
+  height: 100%;
+  padding: 12px 6px;
+  margin: 0;
+  display: flex;
+  overflow: auto;
+}
+
+.board-item {
+  min-width: 0;
+  flex-basis: 284px;
+  flex-shrink: 0;
+  padding-inline: 6px;
+}
+
+.button {
+  height: 44px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background-color: $transparent-background-color;
+  color: $text-secondary-color;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-content {
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plus-icon {
+  @include svg-icon('/assets/icons/plus.svg', $text-secondary-color);
+}
+
+.list {
+  padding: 8px;
+  background-color: $black;
+  border-radius: 12px;
+  color: $text-main-color;
+}
+
+.button-main {
+  height: 32px;
+  padding-inline: 12px;
+  background-color: $button-background-color;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  color: $button-text-color;
+  cursor: pointer;
+}
+
+.button-main:disabled {
+  background-color: $button-disabled-background-color;
+  color: $button-disabled-text-color;
+  cursor: not-allowed;
+}
+
+.button-main:not(:disabled):hover {
+  background-color: $highlight-color;
+}
+
+.button-close {
+  height: 32px;
+  width: 32px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 300;
+  color: $text-main-color;
+}
+
+.button-close:hover {
+  background-color: $button-close-hover-color;
+}
+
+.button-group {
+  display: flex;
+  gap: 4px;
+}
+
+.textarea {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 3px;
+  background-color: inherit;
+  color: $text-main-color;
+  outline: none;
+  resize: none;
+  font-size: 14px;
+}
+
+.textarea:not(.ng-invalid):focus {
+  border-color: $highlight-color;
+}
+
+.textarea.ng-invalid {
+  border-color: $invalid-highlight-color;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.6;
+}

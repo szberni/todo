@@ -1,0 +1,56 @@
+@import 'src/styles/variables';
+@import 'src/styles/icons';
+
+.board-header {
+  height: 56px;
+  padding-inline: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $transparent-background-color;
+  backdrop-filter: blur(4px);
+  color: $text-secondary-color;
+}
+
+.title {
+  padding-left: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 32px;
+  cursor: default;
+}
+
+.board-header-items {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.star-icon {
+  @include svg-icon('/assets/icons/star.svg', $text-secondary-color);
+}
+
+.star-outline-icon {
+  @include svg-icon('/assets/icons/star-outline.svg', $text-secondary-color);
+}
+
+.button {
+  position: relative;
+  height: 32px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background-color: transparent;
+  font-size: 14px;
+  color: $text-secondary-color;
+
+  .icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+  }
+}

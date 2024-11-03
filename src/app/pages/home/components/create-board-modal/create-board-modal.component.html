@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h4 class="modal-title">Create board</h4>
+
+  <button type="button" class="button-close" aria-label="Close" (click)="bsModalRef.hide()">
+    &times;
+  </button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="createBoardForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">
+        Board title
+        <span class="required">
+          {{'' | appendMark : '*' : isTitleControlRequired}}
+        </span>
+      </label>
+
+      <input type="text" class="full-width" id="title" name="title" formControlName="title" />
+
+      <div *ngIf="titleControl?.invalid" class="message">
+        <span role="img" aria-hidden="true">👋</span>
+
+        <p>Board title is required</p>
+      </div>
+    </div>
+    
+    <button type="submit" class="button-main full-width" [disabled]="!createBoardForm.valid">
+      Create
+    </button>
+  </form>
+</div>

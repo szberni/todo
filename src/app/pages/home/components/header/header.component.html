@@ -1,0 +1,9 @@
+<header>
+  <button type="button" (click)="openCreateBoardModal()">Create</button>
+
+  <div class="user">
+    <p>{{ userEmail$ | async }}</p>
+    
+    <button type="button" (click)="logout()">Logout</button>
+  </div>
+</header>

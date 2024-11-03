@@ -1,0 +1,104 @@
+@import 'src/styles/variables.scss';
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 14px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+input {
+  padding: 8px 12px;
+  border: 2px solid $inactive-highlight-color;
+  border-radius: 3px;
+  background-color: inherit;
+  color: $text-main-color;
+  outline: none;
+}
+
+input:not(.ng-invalid):focus {
+  border-color: $highlight-color;
+}
+
+input.ng-invalid {
+  border-color: $invalid-highlight-color;
+}
+
+.modal-header {
+  position: relative;
+  height: 48px;
+  justify-content: center;
+  border: none;
+  padding: 0;
+}
+
+.modal-title {
+  font-size: 14px;
+}
+
+.modal-body {
+  padding-top: 0;
+}
+
+.required {
+  color: $required-color;
+  margin-left: 2px;
+}
+
+.button-main {
+  height: 32px;
+  background-color: $button-background-color;
+  border: none;
+  border-radius: 3px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: $button-text-color;
+  cursor: pointer;
+}
+
+.button-main:disabled {
+  background-color: $button-disabled-background-color;
+  color: $button-disabled-text-color;
+  cursor: not-allowed;
+}
+
+.button-main:not(:disabled):hover {
+  background-color: $highlight-color;
+}
+
+.button-close {
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 8px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 300;
+  color: $text-main-color;
+}
+
+.button-close:hover {
+  background-color: $button-close-hover-color;
+}
+
+.message {
+  padding-top: 4px;
+
+  span {
+    margin-right: 8px;
+  }
+
+  p {
+    display: inline;
+  }
+}
