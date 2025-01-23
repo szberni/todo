@@ -32,7 +32,7 @@ const appRoutes: Routes = [
   },
   {
     path: RouteName.auth,
-    loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('../../projects/auth/src/app/auth.module').then((m) => m.AuthModule),
     canActivate: [AuthLoggedInGuard],
   },
   { path: '**', redirectTo: RouteName.auth },

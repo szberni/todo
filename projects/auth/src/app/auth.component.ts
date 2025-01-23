@@ -4,11 +4,11 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { confirmPassword } from './validators';
-import { FormField, ValidationError } from './enums';
-import { AuthFacadeService, RouteName } from 'src/app/shared';
+import { FormField, RouteName, ValidationError } from './enums';
+// import { AuthFacadeService } from 'src/app/shared';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'mf-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
 })
@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private authFacade: AuthFacadeService,
+    // private authFacade: AuthFacadeService,
     private destroyRef: DestroyRef
   ) {}
 
@@ -32,10 +32,10 @@ export class AuthComponent implements OnInit {
       .subscribe((params: Params) => {
         this.isLogin = params['name'] === RouteName.login;
         this.createForm();
-        this.authFacade.resetError();
+        // this.authFacade.resetError();
       });
 
-    this.error$ = this.authFacade.getError();
+    // this.error$ = this.authFacade.getError();
   }
 
   createForm(): void {
@@ -114,9 +114,9 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const email = this.emailControl.value;
-    const password = this.passwordControl.value;
+    // const email = this.emailControl.value;
+    // const password = this.passwordControl.value;
 
-    this.isLogin ? this.authFacade.login(email, password) : this.authFacade.signup(email, password);
+    // this.isLogin ? this.authFacade.login(email, password) : this.authFacade.signup(email, password);
   }
 }

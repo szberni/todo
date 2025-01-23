@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
 import { AuthComponent } from './auth.component';
-import { RouteName } from 'src/app/shared';
+import { RouteName } from './enums';
 
 const routes: Routes = [
   { path: '', redirectTo: RouteName.signup, pathMatch: 'full' },
@@ -12,7 +14,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AuthComponent],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule.forChild(routes)],
+  declarations: [AppComponent, AuthComponent],
+  imports: [BrowserModule, CommonModule, ReactiveFormsModule, RouterModule.forRoot(routes)],
+  bootstrap: [AppComponent]
 })
 export class AuthModule {}
