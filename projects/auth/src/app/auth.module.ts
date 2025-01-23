@@ -8,9 +8,8 @@ import { AuthComponent } from './auth.component';
 import { RouteName } from './enums';
 
 const routes: Routes = [
-  { path: '', redirectTo: RouteName.signup, pathMatch: 'full' },
-  { path: ':name', component: AuthComponent },
-  { path: '**', redirectTo: '' },
+  { path: 'auth/:name', component: AuthComponent },
+  { path: '**', redirectTo: `auth/${RouteName.signup}` },
 ];
 
 @NgModule({
