@@ -1,6 +1,6 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AuthModule } from './app/auth.module';
+import { MicrofrontendModule } from './app/micro-frontend/micro-frontend.module';
 
 platformBrowserDynamic()
-  .bootstrapModule(AuthModule)
+  .bootstrapModule(MicrofrontendModule)
   .catch(err => console.error(err));

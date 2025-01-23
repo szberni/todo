@@ -113,8 +113,10 @@
       "prefix": "mf",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "ngx-build-plus:build",
           "options": {
+            "singleBundle": true,
+            "outputHashing": "none",
             "outputPath": "projects/auth/dist",
             "index": "projects/auth/src/index.html",
             "main": "projects/auth/src/main.ts",
@@ -154,8 +156,7 @@
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
                 }
-              ],
-              "outputHashing": "all"
+              ]
             }
           }
         },

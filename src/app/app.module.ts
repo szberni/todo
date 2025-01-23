@@ -32,7 +32,7 @@ const appRoutes: Routes = [
   },
   {
     path: RouteName.auth,
-    loadChildren: () => import('../../projects/auth/src/app/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('../micro-frontends/auth-host.module').then((m) => m.AuthHostModule),
     canActivate: [AuthLoggedInGuard],
   },
   { path: '**', redirectTo: RouteName.auth },

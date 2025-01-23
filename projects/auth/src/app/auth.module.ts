@@ -16,6 +16,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [AppComponent, AuthComponent],
   imports: [BrowserModule, CommonModule, ReactiveFormsModule, RouterModule.forRoot(routes)],
-  bootstrap: [AppComponent]
+  exports: [AppComponent]
 })
 export class AuthModule {}

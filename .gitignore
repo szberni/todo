@@ -1,5 +1,6 @@
 # Compiled output
 /dist
+/projects/auth/dist
 /tmp
 /out-tsc
 /bazel-out
