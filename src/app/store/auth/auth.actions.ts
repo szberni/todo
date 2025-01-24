@@ -12,7 +12,7 @@ export const AuthActions = {
     props<{ credentials: AuthCredentials }>()
   ),
 
-  autoLogin:  createAction(
+  autoLogin: createAction(
     '[Auth] Auto Login'
   ),
 

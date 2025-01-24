@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AuthCredentials, User } from 'src/app/shared';
 import { AuthSelectors, AuthActions } from '../../store/auth';
-import { User } from 'src/app/shared';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacadeService {
@@ -28,12 +28,12 @@ export class AuthFacadeService {
     this.store.dispatch(AuthActions.autoLogin());
   }
 
-  login(email: string, password: string): void {
-    this.store.dispatch(AuthActions.login({ credentials: { email, password } }));
+  login(credentials: AuthCredentials): void {
+    this.store.dispatch(AuthActions.login({ credentials }));
   }
 
-  signup(email: string, password: string): void {
-    this.store.dispatch(AuthActions.signup({ credentials: { email, password } }));
+  signup(credentials: AuthCredentials): void {
+    this.store.dispatch(AuthActions.signup({ credentials }));
   }
 
   logout(): void {

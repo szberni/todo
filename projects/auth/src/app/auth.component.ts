@@ -5,7 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { confirmPassword } from './validators';
 import { FormField, RouteName, ValidationError } from './enums';
-// import { AuthFacadeService } from 'src/app/shared';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'mf-auth',
@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    // private authFacade: AuthFacadeService,
+    private authService: AuthService,
     private destroyRef: DestroyRef
   ) {}
 
@@ -32,10 +32,10 @@ export class AuthComponent implements OnInit {
       .subscribe((params: Params) => {
         this.isLogin = params['name'] === RouteName.login;
         this.createForm();
-        // this.authFacade.resetError();
+        this.authService.resetError();
       });
 
-    // this.error$ = this.authFacade.getError();
+    this.error$ = this.authService.error$;
   }
 
   createForm(): void {
@@ -114,9 +114,9 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // const email = this.emailControl.value;
-    // const password = this.passwordControl.value;
+    const email = this.emailControl.value;
+    const password = this.passwordControl.value;
 
-    // this.isLogin ? this.authFacade.login(email, password) : this.authFacade.signup(email, password);
+    this.isLogin ? this.authService.login(email, password) : this.authService.signup(email, password);
   }
 }
