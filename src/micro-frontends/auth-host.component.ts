@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { AuthCredentials, AuthFacadeService } from 'src/app/shared';
+
+interface RouterEvent {
+  url: string;
+  replaceUrl: boolean;
+}
 
 @Component({
   selector: 'app-auth-host',
@@ -9,12 +14,13 @@ import { AuthCredentials, AuthFacadeService } from 'src/app/shared';
   <mf-auth-entry
     [route]="route$ | async"
     [error]="error$ | async"
+    (mfRouteChange)="handleRouteChange($event)"
     (mfResetError)="resetError()"
     (mfLogin)="login($event)"
     (mfSignup)="signup($event)"
   ></mf-auth-entry>`
 })
-export class AuthHostComponent {
+export class AuthHostComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -23,6 +29,27 @@ export class AuthHostComponent {
 
   readonly route$: Observable<string> = this.route.url.pipe(map(() => this.router.url));
   readonly error$: Observable<string | null> = this.authFacade.getError();
+
+  ngOnInit(): void {
+    this.route.url.subscribe((url) => {
+      console.log("route url", url);
+      console.log("router url", this.router.url);
+    });
+  }
+
+  handleRouteChange(e: Event): void {
+    this.navigateToUrl((e as CustomEvent<RouterEvent>).detail);
+  }
+
+  navigateToUrl(e: RouterEvent | undefined): void {
+    if (e?.url && e.url.startsWith('/')) {
+      this.router.navigateByUrl(e.url, {
+        replaceUrl: e.replaceUrl || false,
+      });
+    } else {
+      console.warn('The microFrontendRouting directive received an invalid router event.', e);
+    }
+  }
 
   resetError(): void {
     this.authFacade.resetError();
