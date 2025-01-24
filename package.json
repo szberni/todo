@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "concurrently \"npm run json-server\" \"npm run ng-serve-dev\"",
+    "start-mf-prod": "concurrently \"npm run ng run auth:build:production\" \"npx http-server projects/auth/dist --port 4201\"",
+    "start-mf-local": "npm run ng serve auth",
     "json-server": "json-server-auth db.json --port 8000",
     "ng-serve-dev": "ng serve --configuration=development --port 4000",
     "build": "ng build",
