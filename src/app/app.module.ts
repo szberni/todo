@@ -55,7 +55,7 @@ const appRoutes: Routes = [
       [FeatureKey.cards]: cardsReducer,
     }),
     EffectsModule.forRoot([AuthEffects, BoardEffects, ListsEffects, CardsEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode(), name: 'Todo App' }),
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

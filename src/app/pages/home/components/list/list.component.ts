@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatestWith, distinctUntilChanged, map, skipWhile } from 'rxjs';
-import { ListsFacadeService, CardsFacadeService, CardResponse, ListResponse, sortById, getIds, trackById } from 'src/app/shared';
+import { ListsFacadeService, CardsFacadeService, CardResponse, ListResponse, sortById, getIds, trackById, Status } from 'src/app/shared';
 
 @Component({
   selector: 'app-list',
@@ -29,13 +29,17 @@ export class ListComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.cardsFacade.getCards().pipe(
-      map((cards) => cards.filter(({ listId }) => listId === this.list.id)),
-      skipWhile((cards) => cards.length === 0),
-      combineLatestWith(this.listsFacade.getLists().pipe(
-        map((lists) => lists.find(({id}) => id === this.list.id)?.cardIds),
-        skipWhile((cardIds) => !cardIds?.length || cardIds.length === 0),
-      )),
+    const cards$ = this.cardsFacade.getCardsWithStatus().pipe(
+      skipWhile(({ status }) => status === Status.loading),
+      map(({ cards }) => cards.filter(({ listId }) => listId === this.list.id)),
+    );
+
+    const cardIds$ = this.listsFacade.getLists().pipe(
+      map((lists) => lists.find(({id}) => id === this.list.id)?.cardIds),
+    );
+
+    cards$.pipe(
+      combineLatestWith(cardIds$),
       distinctUntilChanged(([, prevCardIds], [, currCardIds]) => {
         return JSON.stringify(prevCardIds) === JSON.stringify(currCardIds);
       }),
@@ -101,6 +105,9 @@ export class ListComponent implements OnInit, OnChanges {
     const currentCards = event.container.data;
 
     if (event.previousContainer === event.container) {
+      if (event.previousIndex === event.currentIndex) {
+        return
+      }
       moveItemInArray(currentCards, event.previousIndex, event.currentIndex);
       this.listsFacade.update({ id: this.list.id, cardIds: getIds(currentCards) });
     } else {

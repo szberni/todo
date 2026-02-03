@@ -143,12 +143,14 @@ export class ListsEffects {
     );
   });
 
-  handleErrorOnRequestFailure$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ListsActions.requestFailure),
-      tap(() => this.toastr.error('Something went wrong')),
-      concatLatestFrom(() => this.boardsFacade.getBoardId()),
-      map(([, boardId]) => ListsActions.fetchAll({ boardId }))
-    );
-  });
+
+  handleErrorOnRequestFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ListsActions.requestFailure),
+        tap(() => this.toastr.error('Something went wrong')),
+      );
+    },
+    { dispatch: false },
+  );
 }

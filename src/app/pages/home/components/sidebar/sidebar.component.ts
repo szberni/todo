@@ -1,6 +1,6 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BoardTitleIsFavorite } from 'src/app/store';
+import { GeneralBoardInfo } from 'src/app/store';
 import { BoardsFacadeService, RouteName, trackById } from 'src/app/shared';
 
 @Component({
@@ -10,9 +10,9 @@ import { BoardsFacadeService, RouteName, trackById } from 'src/app/shared';
 })
 export class SidebarComponent implements OnInit {
   isOpen = false;
-  boardsTitleIsFavorite$: Observable<BoardTitleIsFavorite[]> | undefined;
+  generalBoardsInfo$: Observable<GeneralBoardInfo[]> | undefined;
   readonly HOME_ROUTE = RouteName.home;
-  readonly trackById: TrackByFunction<BoardTitleIsFavorite> = trackById;
+  readonly trackById: TrackByFunction<GeneralBoardInfo> = trackById;
 
   constructor(private boardsFacade: BoardsFacadeService) {}
 
@@ -21,10 +21,10 @@ export class SidebarComponent implements OnInit {
       this.isOpen = true;
     }
 
-    this.boardsTitleIsFavorite$ = this.boardsFacade.getBoardsTitleIsFavorite();
+    this.generalBoardsInfo$ = this.boardsFacade.getGeneralBoardsInfo();
   }
 
-  toggleFavorite(board: BoardTitleIsFavorite): void {
+  toggleFavorite(board: GeneralBoardInfo): void {
     const { id, isFavorite } = board;
     this.boardsFacade.toggleFavorite(id, isFavorite);
   }

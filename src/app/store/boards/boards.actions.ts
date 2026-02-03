@@ -7,8 +7,8 @@ export const BoardsActions = {
     '[Boards] Fetch All'
   ),
 
-  loadAllTitleIsFavorite: createAction(
-    '[Boards] Load All Title IsFavorite',
+  loadGeneralBoardsInfo: createAction(
+    '[Boards] Load General Boards Info',
     props<{ boards: BoardResponse[] }>()
   ),
 

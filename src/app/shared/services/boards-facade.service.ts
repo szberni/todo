@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { BoardsSelectors, BoardsActions, CurrentBoardActions, BoardTitleIsFavorite } from '../../store/boards';
+import { BoardsSelectors, BoardsActions, CurrentBoardActions, GeneralBoardInfo } from '../../store/boards';
 import { Board, BoardResponse } from 'src/app/shared';
 
 @Injectable({ providedIn: 'root' })
@@ -28,8 +28,8 @@ export class BoardsFacadeService {
     return this.store.select(BoardsSelectors.selectBoardListIds);
   }
 
-  getBoardsTitleIsFavorite(): Observable<BoardTitleIsFavorite[]> {
-    return this.store.select(BoardsSelectors.selectBoardsTitleIsFavorite);
+  getGeneralBoardsInfo(): Observable<GeneralBoardInfo[]> {
+    return this.store.select(BoardsSelectors.selectGeneralBoardsInfo);
   }
 
   fetchAll(): void {

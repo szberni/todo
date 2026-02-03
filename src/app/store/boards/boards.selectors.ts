@@ -4,7 +4,9 @@ import { FeatureKey, sortByFavoriteAndTitle } from 'src/app/shared';
 
 const selectBoardsState = createFeatureSelector<BoardsState>(FeatureKey.boards);
 
-const selectBoard = createSelector(selectBoardsState, ({ currentBoard }) => currentBoard);
+const selectBoardStatus = createSelector(selectBoardsState, ({ status }) => status);
+
+const selectBoard = createSelector(selectBoardsState, ({ board }) => board);
 
 const selectBoardId = createSelector(selectBoard, ({ id }) => id);
 
@@ -14,16 +16,17 @@ const selectBoardIsFavorite = createSelector(selectBoard, ({ isFavorite }) => is
 
 const selectBoardListIds = createSelector(selectBoard, ({ listIds }) => listIds);
 
-const selectBoardsTitleIsFavorite = createSelector(
+const selectGeneralBoardsInfo = createSelector(
   selectBoardsState,
-  ({ boardsTitleIsFavorite }) => sortByFavoriteAndTitle(boardsTitleIsFavorite)
+  ({ generalBoardsInfo }) => sortByFavoriteAndTitle(generalBoardsInfo)
 );
 
 export const BoardsSelectors = {
+  selectBoardStatus,
   selectBoard,
   selectBoardId,
   selectBoardTitle,
   selectBoardIsFavorite,
   selectBoardListIds,
-  selectBoardsTitleIsFavorite,
+  selectGeneralBoardsInfo,
 } as const;

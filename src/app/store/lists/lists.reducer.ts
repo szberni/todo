@@ -1,17 +1,24 @@
 import { createReducer, on } from '@ngrx/store';
-import { ListResponse } from 'src/app/shared';
+import { ListResponse, Status } from 'src/app/shared';
 import { ListsActions } from '.';
 
 export interface ListsState {
   lists: ListResponse[];
+  status: Status;
 }
 
-const initialState: ListsState = { lists: [] };
+const initialState: ListsState = {
+  lists: [],
+  status: Status.loading
+};
 
 export const listsReducer = createReducer<ListsState>(
   initialState,
+  on(ListsActions.fetchAll, (state): ListsState => {
+    return { ...state, status: Status.loading };
+  }),
   on(ListsActions.loadAll, (state, { lists }): ListsState => {
-    return { ...state, lists };
+    return { ...state, lists, status: Status.success };
   }),
   on(ListsActions.loadCreated, (state, { list }): ListsState => {
     return { ...state, lists: [...state.lists, list] };

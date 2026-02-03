@@ -46,7 +46,7 @@ export class BoardEffects {
       switchMap(() => {
         return this.boardsRequests.getAllBoards()
           .pipe(
-            map((boards) => BoardsActions.loadAllTitleIsFavorite({ boards })),
+            map((boards) => BoardsActions.loadGeneralBoardsInfo({ boards })),
             catchError((error: HttpErrorResponse) => of(BoardsActions.requestFailure({ error })))
           );
       })

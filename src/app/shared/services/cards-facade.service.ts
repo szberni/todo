@@ -21,6 +21,10 @@ export class CardsFacadeService {
     return this.store.select(CardsSelectors.selectCards);
   }
 
+  getCardsWithStatus(): Observable<{ cards: CardResponse[], status: string }> {
+    return this.store.select(CardsSelectors.selectCardsWithStatus);
+  }
+
   fetch(id: number): void {
     this.store.dispatch(CurrentCardActions.fetch({ id }));
   }

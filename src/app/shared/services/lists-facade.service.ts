@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ListsSelectors } from '../../store/lists/lists.selectors';
 import { ListsActions } from '../../store/lists/lists.actions';
-import { ListResponse, ListUpdate } from 'src/app/shared';
+import { ListResponse, ListUpdate, Status } from 'src/app/shared';
 
 @Injectable({ providedIn: 'root' })
 export class ListsFacadeService {
@@ -11,6 +11,10 @@ export class ListsFacadeService {
 
   getLists(): Observable<ListResponse[]> {
     return this.store.select(ListsSelectors.selectLists);
+  }
+
+  getListsWithStatus(): Observable<{ lists: ListResponse[], status: Status }> {
+    return this.store.select(ListsSelectors.selectListsWithStatus)
   }
 
   create(title: string): void {

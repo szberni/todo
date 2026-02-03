@@ -13,28 +13,28 @@
 
       <ol class="list">
         <li
-          *ngFor="let boardTitleIsFavorite of boardsTitleIsFavorite$ | async; trackBy: trackById"
+          *ngFor="let generalBoardInfo of generalBoardsInfo$ | async; trackBy: trackById"
           class="list-item hover-background"
         >
           <div class="list-item-text">
             <a
               class="link"
-              routerLink="/{{HOME_ROUTE}}/{{ boardTitleIsFavorite.id }}"
+              routerLink="/{{HOME_ROUTE}}/{{ generalBoardInfo.id }}"
               routerLinkActive="link-active"
             >
-              {{ boardTitleIsFavorite.title }}
+              {{ generalBoardInfo.title }}
             </a>
           </div>
 
           <button
-            *ngIf="boardTitleIsFavorite.id"
+            *ngIf="generalBoardInfo.id"
             type="button"
             class="button"
             aria-label="Star or unstar board"
-            (click)="toggleFavorite(boardTitleIsFavorite)"
+            (click)="toggleFavorite(generalBoardInfo)"
           >
             <div class="icon-container">
-              <div class="icon-resize" [ngClass]="boardTitleIsFavorite.isFavorite ? 'star-icon': 'star-outline-icon'"></div>
+              <div class="icon-resize" [ngClass]="generalBoardInfo.isFavorite ? 'star-icon': 'star-outline-icon'"></div>
             </div>
           </button>
         </li>
