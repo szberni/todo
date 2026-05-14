@@ -1,7 +1,7 @@
 <div class="sidebar" [ngClass]="{ 'sidebar-open': isOpen }">
   <ng-container *ngIf="isOpen; else isNotOpen">
     <div class="sidebar-header">
-      <button type="button" class="button hover-background" (click)="toggleOpenStatus()">
+      <button type="button" class="button hover-background" [attr.data-testid]="testIds.closeButton" (click)="toggleOpenStatus()">
         <div class="icon-container">
           <span class="close-icon"></span>
         </div>
@@ -21,6 +21,7 @@
               class="link"
               routerLink="/{{HOME_ROUTE}}/{{ generalBoardInfo.id }}"
               routerLinkActive="link-active"
+              [attr.data-testid]="testIds.boardLink + '-' + generalBoardInfo.id"
             >
               {{ generalBoardInfo.title }}
             </a>
@@ -31,6 +32,7 @@
             type="button"
             class="button"
             aria-label="Star or unstar board"
+            [attr.data-testid]="testIds.boardFavoriteButton + '-' + generalBoardInfo.id"
             (click)="toggleFavorite(generalBoardInfo)"
           >
             <div class="icon-container">
@@ -44,7 +46,7 @@
 </div>
 
 <ng-template #isNotOpen>
-  <button type="button" class="circle hover-background" (click)="toggleOpenStatus()">
+  <button type="button" class="circle hover-background" [attr.data-testid]="testIds.openButton" (click)="toggleOpenStatus()">
     <span class="open-icon"></span>
   </button>
 </ng-template>

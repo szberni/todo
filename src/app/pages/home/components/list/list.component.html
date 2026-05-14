@@ -8,22 +8,26 @@
       appResizableTextarea
       maxlength="512"
       spellcheck="false"
+      [attr.data-testid]="testIds.titleInput + '-' + listId"
       (blur)="updateListTitle(title)"
+      (keydown.esc)="updateListTitle(title)"
     >{{ listTitle }}</textarea>
 
     <ng-template #listTitleNotEdited>
       <h2
         class="title-text"
         tabindex="0"
+        [attr.data-testid]="testIds.title + '-' + listId"
         (click)="toggleListTitleEditing()"
-        (keypress)="toggleListTitleEditing()"
+        (keydown.space)="toggleListTitleEditing(); $event.preventDefault()"
+        (keydown.enter)="toggleListTitleEditing(); $event.preventDefault()"
       >
         {{ listTitle }}
       </h2>
     </ng-template>
   </div>
 
-  <button type="button" class="button-close" aria-label="Close" (click)="archiveList()">
+  <button type="button" class="button-close" aria-label="Close" [attr.data-testid]="testIds.archiveButton + '-' + listId" (click)="archiveList()">
     &times;
   </button>
 </div>
@@ -48,12 +52,13 @@
         aria-label="Enter a title for this card..."
         spellcheck="false"
         formControlName="title"
+        [attr.data-testid]="testIds.addCardInput + '-' + listId"
       ></textarea>
 
       <div class="button-group">
-        <button type="submit" class="button-main" [disabled]="addCardForm.invalid">Add card</button>
+        <button type="submit" class="button-main" [disabled]="addCardForm.invalid" [attr.data-testid]="testIds.addCardSubmitButton + '-' + listId">Add card</button>
 
-        <button type="button" class="button-close" (click)="resetForm()">&times;</button>
+        <button type="button" class="button-close" [attr.data-testid]="testIds.addCardCloseButton + '-' + listId" (click)="closeForm()">&times;</button>
       </div>
     </form>
   </ol>
@@ -61,7 +66,9 @@
 
 <button
   *ngIf="!isAddCardFormShown"
+  type="button"
   class="button-spacing button-card"
+  [attr.data-testid]="testIds.addCardOpenButton + '-' + listId"
   (click)="isAddCardFormShown = true"
 >
   <div class="btn-content">

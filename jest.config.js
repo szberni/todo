@@ -11,7 +11,8 @@ module.exports = {
     '<rootDir>/dist/',
   ],
   collectCoverage: true,
-  collectCoverageFrom: ["./src/**"],
+  collectCoverageFrom: ["<rootDir>/src/**"],
+  coveragePathIgnorePatterns: ["<rootDir>/src/environments"],
   coverageReporters: ["html"],
   coverageDirectory: "./coverage",
 };

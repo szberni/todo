@@ -50,14 +50,14 @@
         </div>
 
         <div *ngIf="!isDescriptionEditing && card.description !== ''">
-          <button class="btn-actions btn-text" (click)="toggleDescriptionEditing()">Edit</button>
+          <button type="button" class="btn-actions btn-text" (click)="toggleDescriptionEditing()">Edit</button>
         </div>
       </section>
 
       <div class="actions">
         <h3 class="title-small">Actions</h3>
 
-        <button class="btn-actions btn-text btn-alignment full-width" (click)="archive()">
+        <button type="button" class="btn-actions btn-text btn-alignment full-width" (click)="archive()">
           <div class="archive-icon"></div>
           Archive
         </button>
@@ -71,7 +71,8 @@
     class="title text-cursor"
     tabindex="0"
     (click)="toggleTitleEditing()"
-    (keypress)="toggleTitleEditing()"
+    (keydown.space)="toggleTitleEditing(); $event.preventDefault()"
+    (keydown.enter)="toggleTitleEditing(); $event.preventDefault()"
   >
     {{ card.title }}
   </h2>
@@ -83,7 +84,8 @@
     class="text text-cursor btn-actions"
     tabindex="0"
     (click)="toggleDescriptionEditing()"
-    (keypress)="toggleDescriptionEditing()"
+    (keydown.space)="toggleDescriptionEditing(); $event.preventDefault()"
+    (keydown.enter)="toggleDescriptionEditing(); $event.preventDefault()"
   >
     {{
       !card.description || card.description === ''

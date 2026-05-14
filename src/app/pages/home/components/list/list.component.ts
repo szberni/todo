@@ -4,6 +4,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatestWith, distinctUntilChanged, map, skipWhile } from 'rxjs';
 import { ListsFacadeService, CardsFacadeService, CardResponse, ListResponse, sortById, getIds, trackById, Status } from 'src/app/shared';
+import { ListTestIds } from './list.test-ids';
 
 @Component({
   selector: 'app-list',
@@ -11,8 +12,9 @@ import { ListsFacadeService, CardsFacadeService, CardResponse, ListResponse, sor
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit, OnChanges {
-  @Input()
+  @Input({ required: true })
   list: ListResponse = { id: 0, title: '', boardId: 0, archived: false, cardIds: [] };
+  listId: string;
   listTitle: string;
   sortedCards: CardResponse[] = [];
   addCardForm = new FormGroup({
@@ -21,6 +23,7 @@ export class ListComponent implements OnInit, OnChanges {
   isAddCardFormShown = false;
   isListTitleBeingEdited = false;
   readonly trackById: TrackByFunction<CardResponse> = trackById;
+  readonly testIds = ListTestIds;
 
   constructor(
     private listsFacade: ListsFacadeService,
@@ -62,9 +65,10 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const list = changes?.['list'].currentValue;
+    const list = changes?.['list'].currentValue as ListResponse;
 
     if (list) {
+      this.listId = list.id.toString();
       this.listTitle = list.title;
     }
   }
@@ -75,12 +79,14 @@ export class ListComponent implements OnInit, OnChanges {
     this.sortedCards = [...this.sortedCards, { title, id: 0 } as CardResponse ];
     this.cardsFacade.create(title, this.list.id);
 
-    this.resetForm();
+    this.closeForm(true);
   }
 
-  resetForm(): void {
+  closeForm(shouldReset = false): void {
     this.isAddCardFormShown = false;
-    this.addCardForm.reset();
+    if (shouldReset) {
+      this.addCardForm.reset();
+    }
   }
 
   toggleListTitleEditing(): void {
