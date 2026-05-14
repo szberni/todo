@@ -10,7 +10,8 @@
     "watch": "ng build --watch --configuration development",
     "prepare": "husky install",
     "pretty-quick": "pretty-quick --staged",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "test": "jest"
   },
   "private": true,
   "dependencies": {
@@ -44,11 +45,15 @@
     "@angular/cli": "^16.2.10",
     "@angular/compiler-cli": "^16.2.0",
     "@ngrx/eslint-plugin": "^16.3.0",
+    "@types/jest": "^30.0.0",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "concurrently": "^8.2.2",
     "eslint": "^8.51.0",
     "husky": "^8.0.0",
+    "jest": "^29.7.0",
+    "jest-html-reporter": "^4.4.0",
+    "jest-preset-angular": "^14.6.2",
     "json-server": "^0.17.4",
     "json-server-auth": "^2.1.0",
     "prettier": "^2.8.8",
